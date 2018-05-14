@@ -1,0 +1,51 @@
+<query-editor-row query-ctrl="ctrl" class="httpsql-datasource-query-row">
+	<div class="gf-form-inline">
+		<div class="gf-form max-width-12">
+			<gf-form-dropdown 
+				model="ctrl.target.alias"
+				class = "max-width-12"
+				lookup-text="true"
+				allow-custom = "false"
+				get-options="ctrl.getAliasList()">
+			</gf-form-dropdown>
+		</div>
+
+		<div class="gf-form max-width-12">
+			<gf-form-dropdown 
+				model="ctrl.target.metric"
+				class = "max-width-12"
+				lookup-text="true"
+				allow-custom = "false"
+				get-options="ctrl.getMetricList()"
+				on-change = "ctrl.updateMetricParamList()"
+				>
+			</gf-form-dropdown>
+		</div>
+
+		<div class="gf-form" ng-if = "ctrl.panel.type == 'graph'">
+			<label class="gf-form-label query-keyword width-5">Name</label>			
+			<input type="text"
+				ng-model="ctrl.target.label"
+				class="gf-form-input width-12"
+				spellcheck="false"
+			>
+		</div>
+
+		<div class="gf-form" ng-if = "ctrl.target.param_list.length > 0">
+			<label class="gf-form-label query-keyword width-5">Params</label>
+			
+			<input type="text"
+				ng-repeat = "param in ctrl.target.param_list"
+				ng-model="ctrl.target.params[param]"
+				class="gf-form-input width-12"
+				spellcheck="false"
+				placeholder = "{{param}}"
+				ng-change = "ctrl.panelCtrl.refresh();"			
+			>
+		</div>
+
+		<div class="gf-form gf-form--grow">
+			<div class="gf-form-label gf-form-label--grow"></div>
+		</div>
+	</div>
+</query-editor-row>

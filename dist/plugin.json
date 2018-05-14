@@ -1,0 +1,34 @@
+{
+  "name": "Httpsql",
+  "id": "littlebrother-httpsql-datasource",
+  "type": "datasource",
+
+  "metrics": true,
+  "alerting": false,
+  "annotations": false,
+
+  "info": {
+    "description": "Httpsql Datasource plugin for Grafana",
+    "author": {
+      "name": "Little Brother",		
+      "url": "http://little-brother.ru"
+    },
+    "logos": {
+      "small": "img/httpsql.svg",
+      "large": "img/httpsql.svg"
+    },
+    "links": [
+      {
+        "name": "GitHub",
+        "url": "https://github.com/little-brother/httpsql-grafana-datasource"
+      }
+    ],
+    "version": "0.1.0",
+    "updated": "2018-05-10"
+  },
+
+  "dependencies": {
+    "grafanaVersion": "5.x",
+    "plugins": []
+  }
+}
