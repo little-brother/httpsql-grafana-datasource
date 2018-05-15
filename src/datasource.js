@@ -18,24 +18,16 @@ export class HttpsqlDatasource {
 	}
 
 	query(options) {
-		var period = {
-			from: options.range && options.range.from && new Date(options.range.from).getTime(),
-			to: options.range && options.range.to && new Date(options.range.to).getTime()
-		}
+		var from = options.range && options.range.from && new Date(options.range.from).getTime();
+		var	to = options.range && options.range.to && new Date(options.range.to).getTime();
 		
 		var target_list = options.targets.filter((target) => target.alias && target.alias != DEFAULT && target.metric && target.metric != DEFAULT && !target.hide);
 		if (target_list.length == 0)	
 			return Promise.resolve({data: []});
 
-		
-		let url_list = target_list.map(function (target) {
-			['from', 'to'].forEach(function (param) {
-				target[param] = target[param] || period[param];
-				if (target.param_list.indexOf(param) == -1)
-					target.param_list.push(param);
-			})
+		var url_list = target_list.map(function (target) {
 			var params = target.param_list.map((p) => p + '=' + (target.params[p] || '')).join('&') || '';
-			return `/${target.alias}/${target.metric}?${params}&table=t&json`;
+			return `/${target.alias}/${target.metric}?${params}&from=${target.from || from}&to=${target.to || to}&json`;
 		});
 
 		var self = this;		
@@ -93,9 +85,8 @@ export class HttpsqlDatasource {
 				for (var metric in metrics) {
 					if (!self.metricParamList[metric]) {
 						var desc = metrics[metric] || '';
-						self.metricParamList[metric] = desc.substring(desc.indexOf(':') + 1, desc.indexOf('.')).split(',').map((e) => e.trim()).sort();
-					}
-						
+						self.metricParamList[metric] = desc.substring(desc.indexOf(':') + 1, desc.indexOf('.')).split(',').map((e) => e.trim());
+					}	
 				}
 				return Object.keys(metrics);
 			});

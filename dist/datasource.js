@@ -56,10 +56,8 @@ System.register([], function (_export, _context) {
 					value: function query(options) {
 						var _this = this;
 
-						var period = {
-							from: options.range && options.range.from && new Date(options.range.from).getTime(),
-							to: options.range && options.range.to && new Date(options.range.to).getTime()
-						};
+						var from = options.range && options.range.from && new Date(options.range.from).getTime();
+						var to = options.range && options.range.to && new Date(options.range.to).getTime();
 
 						var target_list = options.targets.filter(function (target) {
 							return target.alias && target.alias != DEFAULT && target.metric && target.metric != DEFAULT && !target.hide;
@@ -67,14 +65,10 @@ System.register([], function (_export, _context) {
 						if (target_list.length == 0) return Promise.resolve({ data: [] });
 
 						var url_list = target_list.map(function (target) {
-							['from', 'to'].forEach(function (param) {
-								target[param] = target[param] || period[param];
-								if (target.param_list.indexOf(param) == -1) target.param_list.push(param);
-							});
 							var params = target.param_list.map(function (p) {
 								return p + '=' + (target.params[p] || '');
 							}).join('&') || '';
-							return '/' + target.alias + '/' + target.metric + '?' + params + '&table=t&json';
+							return '/' + target.alias + '/' + target.metric + '?' + params + '&from=' + (target.from || from) + '&to=' + (target.to || to) + '&json';
 						});
 
 						var self = this;
@@ -147,7 +141,7 @@ System.register([], function (_export, _context) {
 									var desc = metrics[metric] || '';
 									self.metricParamList[metric] = desc.substring(desc.indexOf(':') + 1, desc.indexOf('.')).split(',').map(function (e) {
 										return e.trim();
-									}).sort();
+									});
 								}
 							}
 							return Object.keys(metrics);

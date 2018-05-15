@@ -1,6 +1,6 @@
 {
   "name": "httpsql-datasource",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Httpsql plugin for Grafana",
   "repository": {
     "type": "git",

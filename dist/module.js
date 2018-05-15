@@ -1,43 +1,35 @@
 'use strict';
 
 System.register(['./datasource', './query_ctrl'], function (_export, _context) {
-  "use strict";
+	"use strict";
 
-  var HttpsqlDatasource, HttpsqlDatasourceQueryCtrl, HttpsqlConfigCtrl, HttpsqlQueryOptionsCtrl;
+	var HttpsqlDatasource, HttpsqlDatasourceQueryCtrl, HttpsqlConfigCtrl;
 
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
+	function _classCallCheck(instance, Constructor) {
+		if (!(instance instanceof Constructor)) {
+			throw new TypeError("Cannot call a class as a function");
+		}
+	}
 
-  return {
-    setters: [function (_datasource) {
-      HttpsqlDatasource = _datasource.HttpsqlDatasource;
-    }, function (_query_ctrl) {
-      HttpsqlDatasourceQueryCtrl = _query_ctrl.HttpsqlDatasourceQueryCtrl;
-    }],
-    execute: function () {
-      _export('ConfigCtrl', HttpsqlConfigCtrl = function HttpsqlConfigCtrl() {
-        _classCallCheck(this, HttpsqlConfigCtrl);
-      });
+	return {
+		setters: [function (_datasource) {
+			HttpsqlDatasource = _datasource.HttpsqlDatasource;
+		}, function (_query_ctrl) {
+			HttpsqlDatasourceQueryCtrl = _query_ctrl.HttpsqlDatasourceQueryCtrl;
+		}],
+		execute: function () {
+			_export('ConfigCtrl', HttpsqlConfigCtrl = function HttpsqlConfigCtrl() {
+				_classCallCheck(this, HttpsqlConfigCtrl);
+			});
 
-      HttpsqlConfigCtrl.templateUrl = 'partials/config.html';
+			HttpsqlConfigCtrl.templateUrl = 'partials/config.html';
 
-      _export('QueryOptionsCtrl', HttpsqlQueryOptionsCtrl = function HttpsqlQueryOptionsCtrl() {
-        _classCallCheck(this, HttpsqlQueryOptionsCtrl);
-      });
+			_export('Datasource', HttpsqlDatasource);
 
-      HttpsqlQueryOptionsCtrl.templateUrl = 'partials/query.options.html';
+			_export('QueryCtrl', HttpsqlDatasourceQueryCtrl);
 
-      _export('Datasource', HttpsqlDatasource);
-
-      _export('QueryCtrl', HttpsqlDatasourceQueryCtrl);
-
-      _export('ConfigCtrl', HttpsqlConfigCtrl);
-
-      _export('QueryOptionsCtrl', HttpsqlQueryOptionsCtrl);
-    }
-  };
+			_export('ConfigCtrl', HttpsqlConfigCtrl);
+		}
+	};
 });
 //# sourceMappingURL=module.js.map
